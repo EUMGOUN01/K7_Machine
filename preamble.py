@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import mglearn
 from cycler import cycler
+import koreanize_matplotlib
 
 set_matplotlib_formats('pdf', 'png')
 plt.rcParams['savefig.dpi'] = 300

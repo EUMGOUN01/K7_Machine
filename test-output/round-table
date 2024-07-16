@@ -1,0 +1,20 @@
+// The Round Table
+digraph {
+	A [label="집" shape=ellipse]
+	B [label="날개" shape=ellipse]
+	C [label="발" shape=ellipse]
+	D [label="날 수 있는가?" shape=ellipse]
+	E [label="지느러미" shape=ellipse]
+	F [label="포유류인가?" shape=ellipse]
+	G [label="독수리" shape=ellipse]
+	H [label="펭귄" shape=ellipse]
+	A -> B
+	A -> C
+	B -> D
+	B -> E
+	C -> F
+	F -> G
+	F -> H
+	node [fontname="Malgun Gothic"]
+	edge [fontname="Malgun Gothic"]
+}
