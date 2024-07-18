@@ -1,27 +1,37 @@
-from IPython.display import set_matplotlib_formats, display
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-import mglearn
-from cycler import cycler
-import koreanize_matplotlib
+from imageio import imread
 
-set_matplotlib_formats('pdf', 'png')
-plt.rcParams['savefig.dpi'] = 300
-plt.rcParams['figure.dpi'] = 100
-plt.rcParams['image.cmap'] = "viridis"
-plt.rcParams['image.interpolation'] = "none"
-plt.rcParams['savefig.bbox'] = "tight"
-plt.rcParams['lines.linewidth'] = 2
-plt.rcParams['legend.numpoints'] = 1
-plt.rc('axes', prop_cycle=(
-    cycler('color', mglearn.plot_helpers.cm_cycle.colors) +
-    cycler('linestyle', ['-', '-', "--", (0, (3, 3)), (0, (1.5, 1.5))])))
+def plot_animal_tree(ax=None):
+    import graphviz
+    from matplotlib.font_manager import FontProperties
+    
+    plt.figure(dpi=100)
+    if ax is None:
+        ax = plt.gca()
+    
+    # Define the font properties
+    font_name = 'Malgun Gothic'  # Use the name of the font as known to the system
 
-
-np.set_printoptions(precision=3, suppress=True)
-
-pd.set_option("display.max_columns", 8)
-pd.set_option('display.precision', 2)
-
-__all__ = ['np', 'mglearn', 'display', 'plt', 'pd']
+    mygraph = graphviz.Digraph(
+        node_attr={'shape': 'box', 'fontname': font_name},
+        edge_attr={'labeldistance': "10.5", 'fontname': font_name},
+        format="png"
+    )
+    
+    mygraph.node("0", "날개가 있나요?")
+    mygraph.node("1", "날 수 있나요?")
+    mygraph.node("2", "지느러미가 있나요?")
+    mygraph.node("3", "매")
+    mygraph.node("4", "펭귄")
+    mygraph.node("5", "돌고래")
+    mygraph.node("6", "곰")
+    mygraph.edge("0", "1", label="True")
+    mygraph.edge("0", "2", label="False")
+    mygraph.edge("1", "3", label="True")
+    mygraph.edge("1", "4", label="False")
+    mygraph.edge("2", "5", label="True")
+    mygraph.edge("2", "6", label="False")
+    
+    mygraph.render("tmp")
+    ax.imshow(imread("tmp.png"))
+    ax.set_axis_off()
